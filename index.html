@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="app.css">
+	<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+<main>
+<section  class = "todo-body" id="todo-body">
+	<form id="form">
+	<h1>My Todo</h1>
+
+	<div class="todo_view">
+	<ul id="todo_view">
+	</ul>
+	</div>
+	<label id="alert"></label>
+	<div class="todo_input">
+		<input class="add_todo" name="" id="add_todo">
+		<a href="#" id="add"><img src="add_btn.svg" width="10%"></a>
+		<a href="#" id="del"><img src="del.svg" width="10%"></a>
+
+		
+
+	</div>
+	</form>
+	</section>
+	<p style="text-align: center">simple todo app created by peter ndirpaya</p>
+	
+</main>
+
+<script type="text/javascript">
+	
+	$(document).ready(function(e) {   
+
+		 $('#add').click( function() { 
+
+
+		 	var todo = $('#add_todo').val();
+		 	 if($("#add_todo").val() == '') {
+			    $('#alert').html("<strong>Warning!</strong> You left the to-do list empty");
+			    $('#alert').fadeIn().delay(1000).fadeOut();
+			    return false;
+			   }
+
+			   //alert(todo);
+			   
+
+			   $('#todo_view').prepend("<li><h2>" + todo + "</h2></li>");
+			   $('#form')[0].reset();
+
+			   var todos = $('#todo_view').html();
+			   localStorage.setItem('todos', todos);
+			   return false;
+
+		});
+
+		 if(localStorage.getItem('todos')) {
+		$('#todo_view').html(localStorage.getItem('todos'));
+		}
+
+		$('#del').click( function() {
+		window.localStorage.clear();
+		location.reload();
+		return false;
+		});
+
+    
+ });
+</script>
+
+
+</body>
+</html>
